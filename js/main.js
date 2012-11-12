@@ -51,7 +51,7 @@ var nodes_pos = []
           // pt2:  {x:#, y:#}  target position in screen coords
 
           // draw a line from pt1 to pt2
-          ctx.strokeStyle = "rgba(0,0,0, .333)"
+          ctx.strokeStyle = (edge.data.path) ? "red" : "rgba(0,0,0, .333)"
           ctx.lineWidth = 1
           ctx.beginPath()
           ctx.moveTo(pt1.x, pt1.y)
@@ -65,7 +65,7 @@ var nodes_pos = []
 
           // draw a rectangle centered at pt
           var w = ctx.measureText(node.data.name||"").width + 6
-          ctx.fillStyle = (node.data.text) ? "text" : "lightblue"
+          ctx.fillStyle = (node.data.text) ? "tomato" : "deepskyblue"
           if (node.data.text) {
 			ctx.clearRect(pt.x-w/2, pt.y-7, w,14)
 		  } else {
@@ -78,7 +78,7 @@ var nodes_pos = []
           if (name){
             ctx.font = "bold 11px Arial"
             ctx.textAlign = "center"
-			ctx.fillStyle = "orange"
+			ctx.fillStyle = "tomato"
             ctx.fillText(name||"", pt.x, pt.y+4)
 			
 			nodes_pos[name] = {x: pt.x, y:pt.y}
@@ -214,18 +214,18 @@ var nodes_pos = []
 		f:{text:true, name:"node_f"}
        }, 
        edges:{
-         a:{ b:{},
-             c:{},
-             d:{},
-             e:{},
-			 f:{}
+         a:{ b:{path:true},
+             c:{path:false},
+             d:{path:false},
+             e:{path:false},
+			 f:{path:true}
          },
-		 b: { c:{},
-			  e:{}
+		 b: { c:{path:false},
+			  e:{path:false}
 		 },
-		 d: { e:{}
+		 d: { e:{path:false}
 		 },
-		 e: { d:{}
+		 e: { d:{path:false}
 		 }
        }
      })
